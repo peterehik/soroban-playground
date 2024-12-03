@@ -15,7 +15,7 @@ jobs:
     with:
       release_name: ${{ github.ref_name }}          # use git tag as unique release name
       release_description: 'Hello world contract release'       
-      relative_path: '["hello_world"]'  
+      relative_path: 'hello_world'
       package: 'soroban-hello-world-contract'
     secrets:  # the authentication token will be automatically created by GitHub
       release_token: ${{ secrets.GITHUB_TOKEN }}   
