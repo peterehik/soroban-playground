@@ -1,0 +1,21 @@
+name: Build and Release 
+on:
+  push: 
+    tags:
+      - 'v*'  # triggered whenever a new tag (prefixed with "v") is pushed to the repository
+
+permissions:  # required permissions for the workflow
+  id-token: write
+  contents: write
+  attestations: write
+
+jobs:
+  release-contract-ybs:
+    uses: stellar-expert/soroban-build-workflow/.github/workflows/release.yml@8764eba5769e4ffb63883889c2db5cc12eb44ef8 #v22.0.0
+    with:
+      release_name: ${{ github.ref_name }}          # use git tag as unique release name
+      release_description: 'Hello world contract release'       
+      relative_path: '["hello_world"]'  
+      package: 'soroban-hello-world-contract'
+    secrets:  # the authentication token will be automatically created by GitHub
+      release_token: ${{ secrets.GITHUB_TOKEN }}   
